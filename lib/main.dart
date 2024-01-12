@@ -7,9 +7,10 @@ void main() {
   runApp(MaterialApp(
     title: 'Flutter Demo',
     theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      useMaterial3: true,
-    ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        sliderTheme: const SliderThemeData(
+            showValueIndicator: ShowValueIndicator.always)),
     home: const HomePage(),
   ));
 }
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadAudio() async {
     await _player
-        .setAsset('assets/dolphin4.mp3')
+        .setAsset('assets/ClickThree.mp3')
         .then((value) => devtools.log('$value'));
   }
 
@@ -89,13 +90,15 @@ class _HomePageState extends State<HomePage> {
             ),
             ElevatedButton(
               onPressed: _stop,
-              child: Text('Stop'),
+              child: const Text('Stop'),
             ),
             Slider(
               value: _speed,
               min: 0.5,
               max: 2.0,
               onChanged: _adjustSpeed,
+              label: (_speed * 50).roundToDouble().toString(),
+              thumbColor: Colors.blue,
             ),
           ],
         ),
